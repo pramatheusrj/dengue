@@ -487,27 +487,31 @@ break-word;margin-left:15.0pt;margin-top:15.0pt;margin-right:15.0pt;margin-botto
 
 <div class=WordSection1>
 
-<!-- Incluindo botões para os cálculos -->
-<p><a href="javascript:calcularHidratacaoIV();" style="color:blue; text-decoration:underline;">Calcular Hidratação IV</a></p>
-<p><a href="javascript:calcularEsquemaA();" style="color:blue; text-decoration:underline;">Calcular Esquema A</a></p>
+<!-- Botões para cálculos adicionados aqui -->
+<p><button onclick="calcularHidratacaoIV()">Calcular Hidratação IV</button></p>
+<p><button onclick="calcularEsquemaA()">Calcular Esquema A</button></p>
 
+<!-- O conteúdo existente do seu HTML -->
 
-	
 <script>
 function calcularHidratacaoIV() {
     var peso = prompt("Coloque o peso para calcular a hidratação IV (2 – 4 ml/Kg/h):");
-    if (peso) {
-        var hidratacao = 3 * peso; // Assumindo média de 3 ml/Kg/h
-        alert("Hidratação IV necessária: " + hidratacao + " ml/h.");
+    if (!peso || isNaN(peso) || peso <= 0) {
+        alert("Por favor, insira um número válido para o peso.");
+        return;
     }
+    var hidratacao = 3 * parseFloat(peso); // Calcula como 3 ml/kg/h
+    alert("Hidratação IV necessária: " + hidratacao.toFixed(2) + " ml/h.");
 }
 
 function calcularEsquemaA() {
     var peso = prompt("Coloque o peso para calcular o Esquema A (60 ml/kg/dia):");
-    if (peso) {
-        var total = 60 * peso;
-        alert("Total para Esquema A: " + total + " ml/dia. \n\nTRO (1/3): " + (total / 3) + " ml\nOutros líquidos (2/3): " + ((total / 3) * 2) + " ml.");
+    if (!peso || isNaN(peso) || peso <= 0) {
+        alert("Por favor, insira um número válido para o peso.");
+        return;
     }
+    var total = 60 * parseFloat(peso);
+    alert("Total para Esquema A: " + total.toFixed(2) + " ml/dia.\nTRO (1/3): " + (total / 3).toFixed(2) + " ml\nOutros líquidos (2/3): " + ((total / 3) * 2).toFixed(2) + " ml.");
 }
 </script>
 

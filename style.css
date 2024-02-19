@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form#triagemDengue > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+form#triagemDengue > div label {
+    margin-right: 10px;
+}
+
+#sintomas {
+    flex-direction: column;
+}
+
+#sintomas label {
+    margin: 5px 0;
+}

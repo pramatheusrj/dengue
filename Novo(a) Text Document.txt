@@ -1,0 +1,193 @@
+OpcoesSintomas() {
+    const tempoFebre = document.getElementById('tempoFebre').value;
+    const sintomasDiv = document.getElementById('sintomas');
+    sintomasDiv.style.display = tempoFebre === '2a7' ? 'block' : 'none';
+}
+
+function avaliarTriagem() {
+    const tempoFebre = document.getElementById('tempoFebre').value;
+    let sintomasMarcados = 0;
+    const sintomas = [
+        'nausea', 'vomito', 'exantema', 'mialgia', 'artralgia',
+        'cefaleia', 'dorRetroorbitaria', 'petequias', 'provaLaco', 'leucopenia'
+    ];
+    
+    sintomas.forEach(sintoma => {
+        if (document.getElementById(sintoma).checked) sintomasMarcados++;
+    });
+
+    let mensagem = "";
+    if (tempoFebre === "menor2") {
+        mensagem = "Ainda não tem critérios para realizar exames de sangue, tempo de sintomas menor que 2 dias. Orientar sintomático se possível e retorno em 24 ou 48 horas.";
+		
+    } else if (tempoFebre === "maior7") {
+        mensagem = "Tempo de febre superior a 7 dias, pode não ser dengue, pense em outra doença.";
+		
+    } else if (tempoFebre === "2a7") {
+        const resultadoDiv = document.getElementById('resultado');
+        resultadoDiv.innerHTML = `Verifique se o paciente tem sinais de alarme ou gravidade:<br>
+            - Dor abdominal intensa e contínua.<br>
+            - Vômitos persistentes.<br>
+            - Acúmulo de líquidos.<br>
+            - Sangramento de mucosa.<br>
+            - Letargia ou irritabilidade.<br>
+            - Aumento progressivo do hematócrito.<br>
+            - Dificuldade respiratória.<br><br>
+            O paciente apresenta algum desses sinais?<br>`;
+
+        const botaoSim = document.createElement('button');
+        botaoSim.innerText = 'Sim';
+        botaoSim.onclick = function() {
+            alert('O paciente deve ser internado para observação.');
+            const possuiSinaisChoqueOuComprometimentoGrave = confirm(
+                'O paciente possui algum destes sinais?\n' +
+                '- Comprometimento grave de órgãos\n' +
+                '- Sangramento grave\n' +
+                '- Sinais de Choque: Extravasamento grave de plasma, taquicardia, extremidades frias, pulso fraco, enchimento capilar lento, pressão arterial convergente, taquipneia, oliguria, hipotensão arterial, cianose, acumulação de líquido com insuficiência respiratória.'
+            );
+            if (possuiSinaisChoqueOuComprometimentoGrave) {
+                alert('O paciente pertence ao grupo D. Deve ser encaminhado à Unidade de Terapia Intensiva.');
+            } else {
+                alert('O paciente pertence ao grupo C. Deve ser internado no andar, na Clínica Médica.');
+				window.location.href = 'pacienteC.html';
+            }
+        };
+        resultadoDiv.appendChild(botaoSim);
+
+        const botaoNao = document.createElement('button');
+        botaoNao.innerText = 'Não';
+        botaoNao.onclick = function() {
+            const temSangramento = confirm('O paciente apresenta SANGRAMENTO ESPONTÂNEO de pele ou induzido: PROVA DO LAÇO, CONDIÇÃO CLÍNICA ESPECIAL, RISCO SOCIAL, ou COMORBIDADES?');
+            if (temSangramento) {
+                alert('O paciente pertence ao grupo B.');
+				window.location.href = 'pacienteB.html';
+            } else {
+                alert('O paciente pertence ao grupo A. E deve ser acompanhado de forma ambulatorial.');
+                const pesoPaciente = prompt('Informe o peso do paciente em kg para calcular a hidratação necessária:');
+                if (pesoPaciente) {
+                    const peso = parseFloat(pesoPaciente);
+                    if (!isNaN(peso) && peso > 0) {
+                        const hidratacaoTotal = peso * 60; // 60 ml/kg/dia
+                        const hidratacaoDoisTerços = hidratacaoTotal * (2 / 3);
+                        const hidratacaoUmTerço = hidratacaoTotal * (1 / 3);
+                        alert(`Quantidade total de líquido recomendada por dia: ${hidratacaoTotal} ml\n(Cálculo não se aplica para menor de 13 anos):\n\nDividido em:\n- Primeira parte - Líquido Caseiro (2/3 do total): ${hidratacaoDoisTerços.toFixed(2)} ml\n- Segunda parte - Solução de Sais de reidratação oral (SRO) (1/3 do total): ${hidratacaoUmTerço.toFixed(2)} ml\nRetorno se sinais de alarme ou em 5 dias caso não melhore dos sintomas.\n`);
+                    } else {
+                        alert('Peso informado é inválido.');
+                    }
+                }
+            }
+        };
+        resultadoDiv.appendChild(botaoNao);
+    } else {
+        mensagem = "Isso não é dengue.";
+        document.getElementById('resultado').innerText = mensagem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mostrarOpcoesSintomas() {
+    const tempoFebre = document.getElementById('tempoFebre').value;
+    const sintomasDiv = document.getElementById('sintomas');
+    sintomasDiv.style.display = tempoFebre === '2a7' ? 'block' : 'none';
+}
+
+function avaliarTriagem() {
+    const tempoFebre = document.getElementById('tempoFebre').value;
+    let sintomasMarcados = 0;
+    const sintomas = [
+        'nausea', 'vomito', 'exantema', 'mialgia', 'artralgia',
+        'cefaleia', 'dorRetroorbitaria', 'petequias', 'provaLaco', 'leucopenia'
+    ];
+    
+    sintomas.forEach(sintoma => {
+        if (document.getElementById(sintoma).checked) sintomasMarcados++;
+    });
+
+    let mensagem = "";
+    if (tempoFebre === "menor2") {
+        mensagem = "Ainda não tem critérios para realizar exames de sangue, tempo de sintomas menor que 2 dias. Orientar sintomático se possível e retorno em 24 ou 48 horas.";
+		
+    } else if (tempoFebre === "maior7") {
+        mensagem = "Tempo de febre superior a 7 dias, pode não ser dengue, pense em outra doença.";
+		
+    } else if (tempoFebre === "2a7") {
+        const resultadoDiv = document.getElementById('resultado');
+        resultadoDiv.innerHTML = `Verifique se o paciente tem sinais de alarme ou gravidade:<br>
+            - Dor abdominal intensa e contínua.<br>
+            - Vômitos persistentes.<br>
+            - Acúmulo de líquidos.<br>
+            - Sangramento de mucosa.<br>
+            - Letargia ou irritabilidade.<br>
+            - Aumento progressivo do hematócrito.<br>
+            - Dificuldade respiratória.<br><br>
+            O paciente apresenta algum desses sinais?<br>`;
+
+        const botaoSim = document.createElement('button');
+        botaoSim.innerText = 'Sim';
+        botaoSim.onclick = function() {
+            alert('O paciente deve ser internado para observação.');
+            const possuiSinaisChoqueOuComprometimentoGrave = confirm(
+                'O paciente possui algum destes sinais?\n' +
+                '- Comprometimento grave de órgãos\n' +
+                '- Sangramento grave\n' +
+                '- Sinais de Choque: Extravasamento grave de plasma, taquicardia, extremidades frias, pulso fraco, enchimento capilar lento, pressão arterial convergente, taquipneia, oliguria, hipotensão arterial, cianose, acumulação de líquido com insuficiência respiratória.'
+            );
+            if (possuiSinaisChoqueOuComprometimentoGrave) {
+                alert('O paciente pertence ao grupo D. Deve ser encaminhado à Unidade de Terapia Intensiva.');
+            } else {
+                alert('O paciente pertence ao grupo C. Deve ser internado no andar, na Clínica Médica.');
+				window.location.href = 'pacienteC.html';
+            }
+        };
+        resultadoDiv.appendChild(botaoSim);
+
+        const botaoNao = document.createElement('button');
+        botaoNao.innerText = 'Não';
+        botaoNao.onclick = function() {
+            const temSangramento = confirm('O paciente apresenta SANGRAMENTO ESPONTÂNEO de pele ou induzido: PROVA DO LAÇO, CONDIÇÃO CLÍNICA ESPECIAL, RISCO SOCIAL, ou COMORBIDADES?');
+            if (temSangramento) {
+                alert('O paciente pertence ao grupo B.');
+				window.location.href = 'pacienteB.html';
+            } else {
+                alert('O paciente pertence ao grupo A. E deve ser acompanhado de forma ambulatorial.');
+                const pesoPaciente = prompt('Informe o peso do paciente em kg para calcular a hidratação necessária:');
+                if (pesoPaciente) {
+                    const peso = parseFloat(pesoPaciente);
+                    if (!isNaN(peso) && peso > 0) {
+                        const hidratacaoTotal = peso * 60; // 60 ml/kg/dia
+                        const hidratacaoDoisTerços = hidratacaoTotal * (2 / 3);
+                        const hidratacaoUmTerço = hidratacaoTotal * (1 / 3);
+                        alert(`Quantidade total de líquido recomendada por dia: ${hidratacaoTotal} ml\n(Cálculo não se aplica para menor de 13 anos):\n\nDividido em:\n- Primeira parte - Líquido Caseiro (2/3 do total): ${hidratacaoDoisTerços.toFixed(2)} ml\n- Segunda parte - Solução de Sais de reidratação oral (SRO) (1/3 do total): ${hidratacaoUmTerço.toFixed(2)} ml\nRetorno se sinais de alarme ou em 5 dias caso não melhore dos sintomas.\n`);
+                    } else {
+                        alert('Peso informado é inválido.');
+                    }
+                }
+            }
+        };
+        resultadoDiv.appendChild(botaoNao);
+    } else {
+        mensagem = "Isso não é dengue.";
+        document.getElementById('resultado').innerText = mensagem;
+    }
+}
+

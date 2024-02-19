@@ -1,0 +1,55 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Triagem de Dengue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Formulário de Triagem de Dengue</h1>
+    <form id="triagemDengue">
+     <!--     <div>
+            <label for="nomePaciente">Nome do Paciente:</label>
+            <input type="text" id="nomePaciente" name="nomePaciente">
+        </div> -->
+        <div>
+            <label>Tempo de febre:</label>
+            <select id="tempoFebre" name="tempoFebre" onchange="mostrarOpcoesSintomas()">
+                <option value="">Selecione</option>
+                <option value="menor2">Menor que 2 dias</option>
+                <option value="2a7">Entre 2 a 7 dias</option>
+                <option value="maior7">Mais de 7 dias</option>
+            </select>
+        </div>
+        <div id="sintomas" style="display:none;">
+            <label>Sintomas:</label><br>
+            <input type="checkbox" id="nausea" name="sintomas" value="Náusea">
+            <label for="nausea">Náusea</label><br>
+            <input type="checkbox" id="vomito" name="sintomas" value="Vômito">
+            <label for="vomito">Vômito</label><br>
+            <!-- Adicionar novos sintomas aqui -->
+            <input type="checkbox" id="exantema" name="sintomas" value="Exantema">
+            <label for="exantema">Exantema</label><br>
+            <input type="checkbox" id="mialgia" name="sintomas" value="Mialgia">
+            <label for="mialgia">Mialgia</label><br>
+            <input type="checkbox" id="artralgia" name="sintomas" value="Artralgia">
+            <label for="artralgia">Artralgia</label><br>
+            <input type="checkbox" id="cefaleia" name="sintomas" value="Cefaleia">
+            <label for="cefaleia">Cefaleia</label><br>
+            <input type="checkbox" id="dorRetroorbitaria" name="sintomas" value="Dor Retroorbitária">
+            <label for="dorRetroorbitaria">Dor Retroorbitária</label><br>
+            <input type="checkbox" id="petequias" name="sintomas" value="Petéquias">
+            <label for="petequias">Petéquias</label><br>
+            <input type="checkbox" id="provaLaco" name="sintomas" value="Prova do Laço Positiva">
+            <label for="provaLaco">Prova do Laço Positiva</label><br>
+            <input type="checkbox" id="leucopenia" name="sintomas" value="Leucopenia">
+            <label for="leucopenia">Leucopenia</label><br>
+        </div>
+        <div>
+            <button type="button" onclick="avaliarTriagem()">Avaliar</button>
+        </div>
+    </form>
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
